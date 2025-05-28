@@ -1,0 +1,2 @@
+*.mlpackage filter=lfs diff=lfs merge=lfs -text
+TodoApp/FlanT5FineTuned.mlpackage/** filter=lfs diff=lfs merge=lfs -text

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23788" systemVersion="24F74" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Priority" representedClassName="Priority" syncable="YES" codeGenerationType="class">
+        <attribute name="priorityLevel" optional="YES" attributeType="String"/>
+        <relationship name="task" toMany="YES" deletionRule="Nullify" destinationEntity="Task" inverseName="customPriority" inverseEntity="Task"/>
+    </entity>
+    <entity name="Subtask" representedClassName="Subtask" syncable="YES" codeGenerationType="class">
+        <attribute name="deadline" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isCompleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="order" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="taskId" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="taskSubtasks" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Task" inverseName="subtasks" inverseEntity="Task"/>
+        <relationship name="taskSuggestions" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Task" inverseName="aiSuggestedSubs" inverseEntity="Task"/>
+    </entity>
+    <entity name="Task" representedClassName="Task" isAbstract="YES" syncable="YES" codeGenerationType="class">
+        <attribute name="aiSuggestion" optional="YES" attributeType="String"/>
+        <attribute name="deadline" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="taskTitle" optional="YES" attributeType="String"/>
+        <relationship name="aiSuggestedSubs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Subtask" inverseName="taskSuggestions" inverseEntity="Subtask"/>
+        <relationship name="customPriority" maxCount="1" deletionRule="Nullify" destinationEntity="Priority" inverseName="task" inverseEntity="Priority"/>
+        <relationship name="subtasks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Subtask" inverseName="taskSubtasks" inverseEntity="Subtask"/>
+        <relationship name="taskType" maxCount="1" deletionRule="Nullify" destinationEntity="TaskType" inverseName="task" inverseEntity="TaskType"/>
+    </entity>
+    <entity name="TaskType" representedClassName="TaskType" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="titile" optional="YES" attributeType="String"/>
+        <relationship name="task" toMany="YES" deletionRule="Nullify" destinationEntity="Task" inverseName="taskType" inverseEntity="Task"/>
+    </entity>
+</model>
